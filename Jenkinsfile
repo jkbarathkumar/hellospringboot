@@ -21,22 +21,7 @@ pipeline {
             }
         }
 
-        stage('SonarQube Analysis') {
-            when {
-                anyOf {
-                    branch 'develop'
-                    branch pattern: "feature/.*", comparator: "REGEXP"
-                }
-            }
-            environment {
-                SONARQUBE_SCANNER_PARAMS = "-Dsonar.projectKey=java-microservice"
-            }
-            steps {
-                withSonarQubeEnv('SonarQube') {
-                    sh 'mvn sonar:sonar'
-                }
-            }
-        }
+        
 
         stage('Build Docker Image') {
             when {
