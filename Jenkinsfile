@@ -29,7 +29,7 @@ pipeline {
                 }
             }
             environment {
-                SONARQUBE_SCANNER_PARAMS = "-Dsonar.projectKey=java-microservice"
+                SONARQUBE_SCANNER_PARAMS = "-Dsonar.projectKey=javaimgg"
             }
             steps {
                 withSonarQubeEnv('SonarQube') {
