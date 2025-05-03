@@ -1,13 +1,6 @@
-@Library('shared-lib') _
+def call(Map config = [:]) {
+    def mvnCmd = config.get('mavenCmd', 'mvn clean install')
 
-pipeline {
-    agent any
-
-    stages {
-        stage('Build via Shared Library') {
-            steps {
-                mavenBuild(mavenCmd: 'mvn clean package')
-            }
-        }
-    }
+    echo "Running Maven Command: ${mvnCmd}"
+    sh mvnCmd
 }
