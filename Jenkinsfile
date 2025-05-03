@@ -1,6 +1,24 @@
-def call(Map config = [:]) {
-    def mvnCmd = config.get('mavenCmd', 'mvn clean install')
+@Library('shared-lib') _
 
-    echo "Running Maven Command: ${mvnCmd}"
-    sh mvnCmd
+pipeline {
+    agent any
+
+    environment {
+        IMAGE_NAME = "yogeshpri/javaimgg"
+        REGISTRY = "docker.io"
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
+
+        stage('Build via Shared Library') {
+            steps {
+                mavenBuild(mavenCmd: 'mvn clean package')
+            }
+        }
+    }
 }
